@@ -12,6 +12,7 @@ const useConversation = () => {
   }, [params?.conversationId]);
 
   const isOpen = useMemo(() => !!conversationId, [conversationId]);
+  
   return useMemo(
     () => ({
       isOpen,
@@ -21,4 +22,4 @@ const useConversation = () => {
   );
 };
 
-export default useConversation
+export default useConversation;

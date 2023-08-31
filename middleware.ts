@@ -7,5 +7,5 @@ export default withAuth({
 });
 
 export const config = {
-  mathcer: ["/users/:path*"],
+  matcher: ["/users/:path*"],
 };

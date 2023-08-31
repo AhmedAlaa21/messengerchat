@@ -17,7 +17,7 @@ const getConversations = async () => {
         },
       },
       include: {
-        user: true,
+        users: true,
         messages: {
             include: {
                 sender: true,
@@ -26,6 +26,7 @@ const getConversations = async () => {
         }
       },
     });
+    
     return conversations;
   } catch (error: any) {
     return [];

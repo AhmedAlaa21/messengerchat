@@ -51,6 +51,20 @@ const AuthForm = () => {
       axios
         .post("/api/register", data)
         .then(() => signIn("credentials", { ...data, redirect: false }))
+        // .then((callback) => {
+        //   console.log(data);
+        //   console.log({ callback });
+        //   if (callback?.error) {
+        //     toast.error("Invalid credentials!");
+        //   }
+
+        //   if (callback?.ok) {
+        //     router.push("/conversations");
+        //   }
+        // })
+        .then(() => {
+          router.push("/users");
+        })
         .catch(() => {
           toast.error("Something went wrong!");
         })
@@ -67,7 +81,7 @@ const AuthForm = () => {
           }
           if (callback?.ok && !callback?.error) {
             toast.success("Logged in successfully!");
-            router.push("/users");
+            router.push("/conversations");
           }
         })
         .finally(() => {
@@ -86,7 +100,7 @@ const AuthForm = () => {
         }
 
         if (callback?.ok && !callback?.error) {
-          toast.success("Logged in successfully!");
+          router.push("/conversations");
         }
       })
       .finally(() => setIslLoading(false));
@@ -103,6 +117,7 @@ const AuthForm = () => {
               register={register}
               errors={errors}
               disabled={isLoading}
+              required
             />
           )}
           <Input

@@ -31,7 +31,7 @@ const useRoutes = () => {
         href: "#",
         onClick: () => signOut(),
         icon: HiArrowLeftOnRectangle,
-        active: pathname === "/users",
+        // active: pathname === "/users",
       },
     ],
     [pathname, conversationId]

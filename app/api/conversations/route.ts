@@ -9,10 +9,10 @@ export async function POST(request: Request) {
     const { userId, isGroup, members, name } = body;
 
     if (!currentUser?.id || !currentUser?.email) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 400 });
     }
 
-    if (isGroup(!members || members.length < 2 || !name)) {
+    if (isGroup && (!members || members.length < 2 || !name)) {
       return new NextResponse("Invalid data", { status: 400 });
     }
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         data: {
           name,
           isGroup,
-          user: {
+          users: {
             connect: [
               ...members.map((member: { value: string }) => ({
                 id: member.value,
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
           },
         },
         include: {
-          user: true,
+          users: true,
         },
       });
       return NextResponse.json(newConversation);
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
 
     const newConversation = await prisma.conversation.create({
       data: {
-        user: {
+        users: {
           connect: [
             {
               id: currentUser.id,
@@ -72,7 +72,7 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        user: true,
+        users: true,
       },
     });
 

@@ -9,10 +9,13 @@ export default async function UsersLayout({
 }) {
   const users = await getUsers();
   return (
+    
     <Sidebar>
       <div className="h-full">
-        <UserList items= {users}/>
-        {children}</div>;
+        <UserList items={users} />
+        {children}
+      </div>
+      ;
     </Sidebar>
   );
 }

@@ -51,20 +51,17 @@ const AuthForm = () => {
       axios
         .post("/api/register", data)
         .then(() => signIn("credentials", { ...data, redirect: false }))
-        // .then((callback) => {
-        //   console.log(data);
-        //   console.log({ callback });
-        //   if (callback?.error) {
-        //     toast.error("Invalid credentials!");
-        //   }
+        .then((callback) => {
 
-        //   if (callback?.ok) {
-        //     router.push("/conversations");
-        //   }
-        // })
-        .then(() => {
-          router.push("/users");
+          if (callback?.error) {
+            toast.error("Invalid credentials!");
+          }
+
+          if (callback?.ok) {
+            router.push("/conversations");
+          }
         })
+
         .catch(() => {
           toast.error("Something went wrong!");
         })
